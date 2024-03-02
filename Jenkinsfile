@@ -70,8 +70,8 @@ pipeline{
             stage('Docker Build & login'){
                 steps{
                     script{
-                        withDockerRegistry(credentialsId: 'Docker-login', url: 'https://hub.docker.com') {
-                            docker login -u "${DOCKER_USER}" -p "${Docker-login}"
+                        withDockerRegistry(credentialsId: '	Docker-Login', url: 'https://hub.docker.com') {
+                            docker login -u "${DOCKER_USER}" -p "${Docker-Login}"
                         }
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
