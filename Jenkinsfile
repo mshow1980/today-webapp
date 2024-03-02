@@ -71,11 +71,22 @@ pipeline{
                 steps{
                     script{
                         withDockerRegistry(credentialsId: 'Docker-login', url: 'https://hub.docker.com') {
-                            docker_image = docker.build "${IMAGE_NAME}"
-                            docker_image.push("${BUILD_NUMBER}")
-                            docker_image.push('latest')
-                            
+                            docker login -u "${DOCKER_USER}" -p "${Docker-login}"
                         }
+                    }
+                }
+                stage('Docker Build')
+                steps{
+                    script{
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+                }
+            }
+            stage('Docker Push'){
+                steps{
+                    script{
+                        docker_image.push("${BUILD_NUMBER}")
+                        docker_image.push('latest')
                     }
                 }
             }
