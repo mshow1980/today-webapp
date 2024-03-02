@@ -70,7 +70,6 @@ pipeline{
             stage('Docker Build & login'){
                 steps{
                     script{
-                        withDockerRegistry(credentialsId: 'Docker-login') {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
                 }
@@ -90,4 +89,4 @@ pipeline{
                 }
             }
         }
-    }
+    
