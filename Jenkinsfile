@@ -78,6 +78,7 @@ pipeline{
                 steps{
                     script{
                         withCredentials([string(credentialsId: 'Docker-Login', variable: 'Docker-login')])  {
+                            docker login -u "${DOCKER_USER}" -p 'Docker-Login'
                         }
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
