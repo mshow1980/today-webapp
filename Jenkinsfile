@@ -82,6 +82,7 @@ pipeline{
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
                         """
+                        }
                     }
                 }
             }
