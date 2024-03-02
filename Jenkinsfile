@@ -9,7 +9,6 @@ pipeline{
         DOCKER_USER = "mshow1980"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        REGISTRY_CREDS = 'Docker-login'
     }
     stages{
         stage('CleanWorkSpace') {
