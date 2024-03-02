@@ -7,6 +7,7 @@ pipeline{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
         DOCKER_USER = "docker-login"
+        DOCKER_PASS = "docker-pass"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     }
@@ -78,6 +79,7 @@ pipeline{
                 steps{
                     script{
                         withCredentials([usernamePassword(credentialsId: 'Docker-login', passwordVariable: 'docker-pass', usernameVariable: 'docker-login')])  {
+                            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
                         }
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
