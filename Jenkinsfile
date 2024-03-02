@@ -67,6 +67,13 @@ pipeline{
                     }
                 }
             }
+                stage('Docker Build')
+                steps{
+                    script{
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+                }
+            }
             stage('Docker login'){
                 steps{
                     script{
@@ -75,13 +82,6 @@ pipeline{
                         }
                     }
                 }
-                stage('Docker Build')
-                steps{
-                    script{
-                        docker_image = docker.build "${IMAGE_NAME}"
-                    }
-                }
-            }
             stage('Docker Push'){
                 steps{
                     script{
