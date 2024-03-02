@@ -3,6 +3,14 @@ pipeline{
     tools{
         maven 'maven3'
     }
+    environment{
+        APP_NAME = "today-webapp"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "mshow1980"
+        IMAGE_NAME = "$(DOCKER_USER)" + "/" + "$(APP_NAME)"
+        IMAGE_TAG = "$(RELEASE)-$(BUILD_NUMBER)"
+        REGISTRY_CREDS = 'Docker-login'
+    }
     stages{
         stage('CleanWorkSpace') {
             steps{
@@ -49,6 +57,25 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'Jenkins-Token') {
                         sh 'mvn sonar:sonar'
+                        }
+                    }
+                }
+            }
+            stage('Quality Gate'){
+                steps{
+                    script{
+                        waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-Token'
+                    }
+                }
+            }
+            stage('Build $ Push Docker Image'){
+                steps{
+                    script{
+                        withDockerRegistry(credentialsId: 'Docker-login', url: 'https://hub.docker.com') {
+                            docker_image = docker.build "$(IMAGE_NAME)"
+                            docker_image.push("${BUILD_NUMBER}")
+                            docker_image.push('latest')
+                            
                         }
                     }
                 }
