@@ -6,7 +6,7 @@ pipeline{
     environment{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
-        DOCKER_USER = "Docker-login"
+        DOCKER_USER = "docker-login"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     }
