@@ -67,21 +67,16 @@ pipeline{
                     }
                 }
             }
-            stage('Docker Build'){
-                steps{
-                    script{
-                        docker_image = docker.build "${IMAGE_NAME}"
-                    }
-                }
-            }
-            stage('Docker login'){
+            stage('Docker Build & login'){
                 steps{
                     script{
                         withDockerRegistry(credentialsId: 'Docker-login', url: 'https://hub.docker.com') {
                             docker login -u "${DOCKER_USER}" -p "${Docker-login}"
                         }
+                        docker_image = docker.build "${IMAGE_NAME}"
                     }
                 }
+            }
             stage('Docker Push'){
                 steps{
                     script{
