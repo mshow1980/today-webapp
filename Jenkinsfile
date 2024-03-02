@@ -7,7 +7,7 @@ pipeline{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
         DOCKER_USER = "mshow1980"
-        DOCKER_PASS - "Docker-pass"
+        DOCKER_PASS = "Docker-pass"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     }
