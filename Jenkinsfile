@@ -67,7 +67,7 @@ pipeline{
                     }
                 }
             }
-                stage('Docker Build')
+            stage('Docker Build'){
                 steps{
                     script{
                         docker_image = docker.build "${IMAGE_NAME}"
@@ -91,4 +91,5 @@ pipeline{
                 }
             }
         }
-    }  
+    }
+}  
