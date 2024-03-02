@@ -79,6 +79,7 @@ pipeline{
                     script{
                         withCredentials([usernamePassword(credentialsId: 'Docker-login', passwordVariable: 'docker-pass', usernameVariable: 'docker-login')]) {
                     sh """
+                        docker login -u "${DOCKER_USER} -p $docker-pass
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
                         """
