@@ -72,7 +72,7 @@ pipeline{
                     script{
                         withCredentials([string(credentialsId: 'Docker-Login', variable: 'Docker-login')])  {
                         }
-                        docker_image = docker.build "${IMAGE_NAME}"
+                        docker_image = docker.build -t "${IMAGE_TAG}" "${IMAGE_NAME}"
                     }
                 }
             }
