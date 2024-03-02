@@ -25,11 +25,9 @@ pipeline{
                 }
             }
         }
-        stage('Owasp Dependency check'){
-            steps{
-                script{
         stage ('OWASP Dependency-Check Vulnerabilities') {
             steps {
+                script{
                 dependencyCheck additionalArguments: ''' 
                     -o "./" 
                     -s "./"
@@ -51,10 +49,9 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'Jenkins-Token') {
                         sh 'mvn sonar:sonar'
+                        }
                     }
                 }
             }
         }
-    }
-
-}
+    }  
