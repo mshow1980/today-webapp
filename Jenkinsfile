@@ -77,9 +77,11 @@ pipeline{
             stage('Docker Push'){
                 steps{
                     script{
+                       sh """
                         docker login -u "${DOCKER_USER}"   -p Control10
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
+                        """
                     }
                 }
             }
