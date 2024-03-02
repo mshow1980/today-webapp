@@ -77,7 +77,7 @@ pipeline{
             stage('Docker Push'){
                 steps{
                     script{
-                        withCredentials([usernamePassword(credentialsId: 'Docker-login', passwordVariable: 'Docker-login', usernameVariable: 'Docker-login')])  {
+                        withCredentials([usernamePassword(credentialsId: 'Docker-login', passwordVariable: 'docker-pass', usernameVariable: 'docker-login')])  {
                         }
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
