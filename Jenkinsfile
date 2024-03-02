@@ -79,7 +79,6 @@ pipeline{
                     script{
                         withDockerRegistry(credentialsId: 'docker-login') {
                     sh """
-                        docker login -u "${DOCKER_USER}" -p "${password}
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
                         """
