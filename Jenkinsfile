@@ -72,7 +72,7 @@ pipeline{
                 steps{
                     script{
                         withDockerRegistry(credentialsId: 'Docker-login', url: 'https://hub.docker.com') {
-                            docker_image = docker.build "$(IMAGE_NAME)"
+                            docker_image = docker.build "${IMAGE_NAME}"
                             docker_image.push("${BUILD_NUMBER}")
                             docker_image.push('latest')
                             
