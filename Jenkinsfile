@@ -1,5 +1,7 @@
 pipeline{
-    agent any
+    agent {
+        label "jenkins agent"
+    }
     environment{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
