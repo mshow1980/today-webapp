@@ -69,19 +69,21 @@ pipeline{
                     }
                 }
             }
-            stage('Docker Build & login'){
+            stage('Docker Build'){
                 steps{
                     script{
                         withDockerRegistry(credentialsId: 'Docker-login')  {
                         docker_image = docker.build "${IMAGE_NAME}"   
                         }
+                    }
+                }
+                stage('Pushing Image') {
                         withDockerRegistry(credentialsId: 'Docker-login')  {
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
                         }
-                    }
                 }
-                stage('Delete DOcker Images'){
+                stage('Delete Images & logout Docker'){
                     steps{
                         script{
                             sh """
