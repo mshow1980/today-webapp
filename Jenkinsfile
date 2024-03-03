@@ -86,7 +86,7 @@ pipeline{
             steps{
                 script{
                     sh """
-                        docker rmi ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}
                         docker rmi ${IMAGE_NAME}:latest
                         """
                         }
