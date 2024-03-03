@@ -37,8 +37,9 @@ pipeline{
                         git commit -m 'Updated the deployment file'
                         """
                     }
-                } withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
                     sh 'git push https://github.com/mshow1980/today-webapp.git deployment '
+                }
             }
         }
     }
