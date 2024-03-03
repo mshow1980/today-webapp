@@ -7,7 +7,7 @@ pipeline{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
         DOCKER_USER = "mshow1980"
-        DOCKER_PASS = "Docker-pass"
+        DOCKER_PASS = "docker-pass"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
     }
@@ -55,7 +55,7 @@ pipeline{
         stage('SOnarqube Analysis'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'Jenkins-Token') {
+                    withSonarQubeEnv(credentialsId: 'SOnar-Token') {
                         sh 'mvn sonar:sonar'
                         }
                     }
@@ -64,17 +64,17 @@ pipeline{
             stage('Quality Gate'){
                 steps{
                     script{
-                        waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-Token'
+                        waitForQualityGate abortPipeline: false, credentialsId: 'SOnar-Token'
                     }
                 }
             }
             stage('Docker Build & login'){
                 steps{
                     script{
-                        withCredentials([string(credentialsId: 'Docker-pass', variable: 'Docker-pass')]) {
+                        withCredentials([string(credentialsId: 'docker-pass', variable: 'docker-pass')]) {
                         docker_image = docker.build "${IMAGE_NAME}"   
                         }
-                        withCredentials([string(credentialsId: 'Docker-pass', variable: 'Docker-pass')]) {
+                        withCredentials([string(credentialsId: 'docker-pass', variable: 'docker-pass')]) {
                         docker_image.push("${BUILD_NUMBER}")
                         docker_image.push('latest')
                         }
