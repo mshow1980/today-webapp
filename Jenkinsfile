@@ -75,11 +75,6 @@ pipeline{
                     withDockerRegistry(credentialsId: 'Docker-login')  {
                     docker_image = docker.build "${IMAGE_NAME}"   
                         }
-                    }
-                }
-        stage('Pushing Image') {
-            steps{
-                script{
                     withDockerRegistry(credentialsId: 'Docker-login')  {
                     docker_image.push("${BUILD_NUMBER}")
                     docker_image.push('latest')
