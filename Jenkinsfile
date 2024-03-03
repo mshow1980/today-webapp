@@ -36,7 +36,7 @@ pipeline{
                         cat deployment.yaml
                         git add deployment.yaml
                         git commit -m 'Updated the deployment file'
-                        git push https://${REGISTRY_CREDS}@github.com/${GIT_USERNAME}/today-webapp.git 
+                        git push https://github.com/mshow1980/today-webapp.git deployment 
                         """
                     }
                 }
