@@ -27,7 +27,6 @@ pipeline{
         stage('Updating Deployment Manifest'){
             steps{
                 script{
-                    withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
                         sh """
                         git config --global user.name "mshow1980"
                         git config --global user.email "mshow1980@aol.com"
@@ -36,10 +35,10 @@ pipeline{
                         cat deployment.yaml
                         git add deployment.yaml
                         git commit -m 'Updated the deployment file'
-                        git push https://github.com/mshow1980/today-webapp.git deployment 
                         """
                     }
-                }
+                } withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
+                    sh 'git push https://github.com/mshow1980/today-webapp.git deployment '
             }
         }
     }
