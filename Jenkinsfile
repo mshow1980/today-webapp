@@ -35,6 +35,7 @@ pipeline{
                         cat deployment.yaml
                         git add deployment.yaml
                         git commit -m 'Updated the deployment file'
+                        git branch
                         """
                     }
                     withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
