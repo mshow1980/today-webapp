@@ -7,7 +7,7 @@ pipeline{
         APP_NAME = "today-webapp"
         RELEASE = "1.0.0"
         DOCKER_USER = "mshow1980"
-        REGISTRY_CREDS = 'Docker-login'
+        REGISTRY_CREDS = 'docker-login'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials('JENKINS_API_TOKEN')
@@ -53,10 +53,17 @@ pipeline{
                 }
             }
         }
+        stage('Mvn Build'){
+            steps{
+                script{
+                    sh 'mvn build package'
+                }
+            }
+        }
         stage('SOnarqube Analysis'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'SOnar-Token') {
+                    withSonarQubeEnv(credentialsId: 'SOnar-token') {
                         sh 'mvn sonar:sonar'
                         }
                     }
@@ -72,10 +79,10 @@ pipeline{
         stage('Build Docker Image') {
             steps{
                 script{
-                    withDockerRegistry(credentialsId: 'Docker-login')  {
+                    withDockerRegistry(credentialsId: 'docker-login')  {
                     docker_image = docker.build "${IMAGE_NAME}"   
                         }
-                    withDockerRegistry(credentialsId: 'Docker-login')  {
+                    withDockerRegistry(credentialsId: 'docker-login')  {
                     docker_image.push("${BUILD_NUMBER}")
                     docker_image.push('latest')
                             }
