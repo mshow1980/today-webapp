@@ -7,7 +7,7 @@ pipeline{
         RELEASE = "1.0.0"
         GIT_USERNAME = "mshow1980"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        REGISTRY_CREDS  = "git-login"
+        REGISTRY_CREDS  = "git-token"
 
 
     }
