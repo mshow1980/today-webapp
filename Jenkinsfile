@@ -30,6 +30,8 @@ pipeline{
                         sh """
                         git config --global user.name "mshow1980"
                         git config --global user.email "mshow1980@aol.com"
+                        git branch
+                        git checkout deployment
                         cat deployment.yaml
                         sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
                         cat deployment.yaml
