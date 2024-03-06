@@ -45,13 +45,6 @@ pipeline{
                 }
             }
         }
-        stage('Mvn Build'){
-            steps{
-                script{
-                    sh 'mvn build package'
-                }
-            }
-        }
         stage('SOnarqube Analysis'){
             steps{
                 script{
