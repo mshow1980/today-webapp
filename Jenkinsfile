@@ -26,13 +26,6 @@ pipeline{
                 }
             }
         }
-        stage('maven clean install'){
-            steps{
-                script{
-                    sh "mvn clean install package"
-                }
-            }
-        }
         stage ('OWASP Dependency-Check Vulnerabilities') {
             steps {
                 script{
