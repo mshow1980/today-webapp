@@ -39,7 +39,7 @@ pipeline{
                         git checkout deployment
                         """
                     }
-                    withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
+                    withCredentials([gitUsernamePassword(credentialsId: 'git-token', gitToolName: 'Default')]) {
                     sh 'git push https://github.com/mshow1980/today-webapp.git deployment '
                 }
             }
