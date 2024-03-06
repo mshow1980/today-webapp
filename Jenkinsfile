@@ -38,7 +38,21 @@ pipeline{
                 }
             }
         }
-        stage('Test Application'){
+        stage('TRIVY FS SCAN'){
+            steps{
+                script{
+                    sh 'trivy fs .'
+                }
+            }
+        }
+        stage('Mvn Build'){
+            steps{
+                script{
+                    sh 'mvn build package'
+                }
+            }
+        }
+                stage('Test Application'){
             steps{
                 script{
                     sh 'mvn test'
