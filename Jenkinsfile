@@ -45,17 +45,17 @@ pipeline{
                 }
             }
         }
-        stage('Mvn Build'){
-            steps{
-                script{
-                    sh 'mvn build package'
-                }
-            }
-        }
-                stage('Test Application'){
+        stage('Test Application'){
             steps{
                 script{
                     sh 'mvn test'
+                }
+            }
+        }
+                stage('mvn build'){
+            steps{
+                script{
+                    sh 'mvn packaget'
                 }
             }
         }
